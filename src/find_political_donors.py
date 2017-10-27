@@ -1,39 +1,12 @@
 #!/usr/bin/env python
+from median import Median
 
-import re
-from heapq import *
-
-class Median:
-    def __init__(self):
-        self.heaps = [], []
-        self.total = 0
-        self.num = 0
-
-    def add_num(self, num):
-        small, large = self.heaps
-        heappush(small, -heappushpop(large, num))
-        if len(large) < len(small):
-            heappush(large, -heappop(small))
-        self.num += 1
-        self.total += num
-
-    def find_median(self):
-        small, large = self.heaps
-        if len(large) > len(small):
-            return float(large[0])
-        return (large[0] - small[0]) / 2.0
-
-    def get_num(self):
-        return self.num
-
-    def get_total(self):
-        return self.total
 
 def process_data(line):
     fields = line.strip().split('|')
     return fields[0], fields[10][:5], fields[13], int(fields[14]), fields[15]
 
-with open('../input/test') as f, open('../output/test', 'w') as out:
+with open('../input/test') as f, open('../output/test1', 'w') as out:
     file_by_zip = {}
     for line in f:
         cmte, zip, dt, amt, id = process_data(line)
