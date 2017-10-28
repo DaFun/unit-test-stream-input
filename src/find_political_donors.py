@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 from median import Median
 import datetime
-
+import argparse
+import sys
 
 # parse the relevant fields from line
 def process_data(line):
@@ -78,7 +79,7 @@ def median_by_zip(dict_by_zip, cmte, zip, amt, out):
         ready_to_print_total = median.get_total()
         
     # print out info according to the median object
-    out.write("{} | {} | {} | {} | {}\n".format(cmte, zip, ready_to_print_median, ready_to_print_num, ready_to_print_total))
+    out.write("{}|{}|{}|{}|{}\n".format(cmte, zip, ready_to_print_median, ready_to_print_num, ready_to_print_total))
 
 
 def median_by_date(dict_by_date, cmte, dt, amt):
@@ -116,22 +117,28 @@ def print_median_by_date(dict_by_date, out):
             ready_to_print_median = median.find_median()
             ready_to_print_num = median.get_num()
             ready_to_print_total = median.get_total()
-            out.write("{} | {} | {} | {} | {}\n".format(cmte, date, ready_to_print_median, ready_to_print_num, ready_to_print_total))
+            out.write("{}|{}|{}|{}|{}\n".format(cmte, date, ready_to_print_median, ready_to_print_num, ready_to_print_total))
 
 
 def main():
-    with open('../input/test') as f, open('../output/test1', 'w') as out, open('../output/test2', 'w') as out1:
-        dict_by_zip = {}
-        dict_by_date = {}
-        for line in f:
+    parser = argparse.ArgumentParser(description='input and output files')
+    parser.add_argument("--infile", "-i", nargs=1, help="input file")
+    parser.add_argument("--zip", "-z", nargs=1, help="medianvals_by_zip")
+    parser.add_argument("--date", "-d", nargs=1, help="medianvals_by_date")
+    args = parser.parse_args()
+
+    dict_by_zip = {}
+    dict_by_date = {}
+    with open(args.infile[0], 'r') as infile, open(args.zip[0], 'w') as out_by_zip, open(args.date[0], 'w') as out_by_date:
+        for line in infile:
             data, other_valid, date_valid, zip_valid = process_data(line)
             cmte, zip, dt, amt = data
             if other_valid:
                 if zip_valid:
-                    median_by_zip(dict_by_zip, cmte, zip, amt, out)
+                    median_by_zip(dict_by_zip, cmte, zip, amt, out_by_zip)
                 if date_valid:
                     median_by_date(dict_by_date, cmte, dt, amt)
-        print_median_by_date(dict_by_date, out1)
+        print_median_by_date(dict_by_date, out_by_date)
 
 
 if __name__ == '__main__':
