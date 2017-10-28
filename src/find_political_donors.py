@@ -54,7 +54,7 @@ def median_by_zip(dict_by_zip, cmte, zip, amt, out):
         median = zip_dict.get(zip, None)
         if median:
             median.add_num(amt)
-            ready_to_print_median = median.find_median()
+            ready_to_print_median = median.get_median()
             ready_to_print_num = median.get_num()
             ready_to_print_total = median.get_total()
         else:
@@ -62,7 +62,7 @@ def median_by_zip(dict_by_zip, cmte, zip, amt, out):
             median = Median()
             median.add_num(amt)
             zip_dict[zip] = median
-            ready_to_print_median = median.find_median()
+            ready_to_print_median = median.get_median()
             ready_to_print_num = median.get_num()
             ready_to_print_total = median.get_total()
     else:
@@ -73,7 +73,7 @@ def median_by_zip(dict_by_zip, cmte, zip, amt, out):
         median.add_num(amt)
         zip_dict[zip] = median
         dict_by_zip[cmte] = zip_dict
-        ready_to_print_median = median.find_median()
+        ready_to_print_median = median.get_median()
         ready_to_print_num = median.get_num()
         ready_to_print_total = median.get_total()
         
@@ -113,7 +113,7 @@ def print_median_by_date(dict_by_date, out):
         # sorted chronologically by date
         for dt, median in sorted(v.items()):
             date = dt.strftime("%m%d%Y")
-            ready_to_print_median = median.find_median()
+            ready_to_print_median = median.get_median()
             ready_to_print_num = median.get_num()
             ready_to_print_total = median.get_total()
             out.write("{}|{}|{}|{}|{}\n".format(cmte, date, ready_to_print_median, ready_to_print_num, ready_to_print_total))

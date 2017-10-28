@@ -19,7 +19,7 @@ class Median:
         self.num += 1
         self.total += num
 
-    def find_median(self):
+    def get_median(self):
         small, large = self.heaps
 
         # odd elements in total
@@ -29,7 +29,8 @@ class Median:
         # even elements in total
         else:
             # deal with round up, especially when meet big number
-            return ((large[0] - small[0]) >> 1) + ((large[0] + small[0]) & 1)
+            middle = large[0] - small[0]
+            return (middle >> 1) + (middle & 1)
 
     def get_num(self):
         return self.num
