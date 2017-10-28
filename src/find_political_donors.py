@@ -47,6 +47,7 @@ def median_by_zip(dict_by_zip, cmte, zip, amt, out):
     # get the zip dictionary according to the recipient id 
     zip_dict = dict_by_zip.get(cmte, None)
     
+
     # if dict_by_zip already has the recipient transaction
     if zip_dict:
         # get the median object according to zip code 
@@ -132,5 +133,7 @@ def main():
                     median_by_date(dict_by_date, cmte, dt, amt)
         print_median_by_date(dict_by_date, out1)
 
+
 if __name__ == '__main__':
     main()
+
