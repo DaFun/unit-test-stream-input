@@ -2,7 +2,6 @@
 from median import Median
 import datetime
 import argparse
-import sys
 
 # parse the relevant fields from line
 def process_data(line):
