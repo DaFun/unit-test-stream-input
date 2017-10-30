@@ -15,7 +15,7 @@ def process_data(line):
     zip_valid = False
 
     fields = line.strip().split('|')
-    cmte, zip, date, amt, id = fields[0], fields[10], fields[13], fields[14], fields[15]
+    cmte, zip, date, amt, id = fields[0], fields[10], fields[13], fields[14], fields[15].strip()
     if cmte and not id:
         other_valid = True
     else:
@@ -130,13 +130,14 @@ def main():
     dict_by_date = {}
     with open(args.infile[0], 'r') as infile, open(args.zip[0], 'w') as out_by_zip, open(args.date[0], 'w') as out_by_date:
         for line in infile:
-            data, other_valid, date_valid, zip_valid = process_data(line)
-            cmte, zip, dt, amt = data
-            if other_valid:
-                if zip_valid:
-                    median_by_zip(dict_by_zip, cmte, zip, amt, out_by_zip)
-                if date_valid:
-                    median_by_date(dict_by_date, cmte, dt, amt)
+            if line.strip():
+                data, other_valid, date_valid, zip_valid = process_data(line)
+                cmte, zip, dt, amt = data
+                if other_valid:
+                    if zip_valid:
+                        median_by_zip(dict_by_zip, cmte, zip, amt, out_by_zip)
+                    if date_valid:
+                        median_by_date(dict_by_date, cmte, dt, amt)
         print_median_by_date(dict_by_date, out_by_date)
 
 
