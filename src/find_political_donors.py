@@ -15,7 +15,7 @@ def process_data(line):
     zip_valid = False
 
     fields = line.strip().split('|')
-    cmte, zip, date, amt, id = fields[0], fields[10], fields[13], int(fields[14]), fields[15]
+    cmte, zip, date, amt, id = fields[0], fields[10], fields[13], fields[14], fields[15]
     if cmte and not id:
         other_valid = True
     else:
