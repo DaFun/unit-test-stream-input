@@ -3,6 +3,7 @@ from median import Median
 import datetime
 import argparse
 
+
 # parse the relevant fields from line
 def process_data(line):
     # if valid for CMTE_ID, TRANSACTION_AMT, or OTHER_ID
@@ -15,11 +16,15 @@ def process_data(line):
     zip_valid = False
 
     fields = line.strip().split('|')
+
+    if len(fields) < 16:
+        return [None]*4, other_valid, date_valid, zip_valid
+
     cmte, zip, date, amt, id = fields[0], fields[10], fields[13], fields[14], fields[15].strip()
     if cmte and not id:
         other_valid = True
     else:
-        return [cmte, zip, date, amt], other_valid, date_valid, zip_valid
+        return [None]*4, other_valid, date_valid, zip_valid
 
     # make sure amt is valid integer
     try:
@@ -78,7 +83,7 @@ def median_by_zip(dict_by_zip, cmte, zip, amt, out):
         ready_to_print_total = median.get_total()
         
     # print out info according to the median object
-    out.write("{}|{}|{}|{}|{}\n".format(cmte, zip, ready_to_print_median, ready_to_print_num, ready_to_print_total))
+    out.write(f'{cmte}|{zip}|{ready_to_print_median}|{ready_to_print_num}|{ready_to_print_total}\n')
 
 
 def median_by_date(dict_by_date, cmte, dt, amt):
@@ -116,7 +121,7 @@ def print_median_by_date(dict_by_date, out):
             ready_to_print_median = median.get_median()
             ready_to_print_num = median.get_num()
             ready_to_print_total = median.get_total()
-            out.write("{}|{}|{}|{}|{}\n".format(cmte, date, ready_to_print_median, ready_to_print_num, ready_to_print_total))
+            out.write(f'{cmte}|{date}|{ready_to_print_median}|{ready_to_print_num}|{ready_to_print_total}\n')
 
 
 def main():
@@ -143,4 +148,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
