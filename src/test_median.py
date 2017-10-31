@@ -36,15 +36,10 @@ class MedianTestCase(unittest.TestCase):
         self.assertEqual(self.median.get_median(), 4611686018427387904)
 
     def test_negative_num(self):
-        self.median.add_num(-1)
-        self.assertEqual(self.median.get_median(), -1)
-        self.median.add_num(-2)
-        self.assertEqual(self.median.get_median(), -1)
-        self.median.add_num(-2)
-        self.assertEqual(self.median.get_num(), 3)
-        self.assertEqual(self.median.get_median(), -2)
-        self.assertEqual(self.median.get_total(), -5)
-
+        self.median.add_num(-62)
+        self.assertEqual(self.median.get_median(), -62)
+        self.median.add_num(-63)
+        self.assertEqual(self.median.get_median(), -63)
         # if all negative
 
 

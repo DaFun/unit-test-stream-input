@@ -30,7 +30,9 @@ class Median:
         else:
             # deal with round up, especially when meet big number
             middle = large[0] - small[0]
-            return (middle >> 1) + (middle & 1)
+            res = middle if middle >= 0 else -middle
+            res = (res >> 1) + (res & 1)
+            return res if middle >= 0 else -res
 
     def get_num(self):
         return self.num
