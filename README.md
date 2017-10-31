@@ -18,7 +18,7 @@ Before run it, save the itcont.txt into `input/` directory
 ./run.sh
 ```
 
-### Arguments for the script
+### Arguments for the python script
 ```bash
 -i /to/itcont/file/path
 -d /to/medianvals_by_date/file/path
