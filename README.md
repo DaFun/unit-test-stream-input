@@ -18,6 +18,14 @@ Before run it, save the itcont.txt into `input/` directory
 ./run.sh
 ```
 
+### Arguments for the script
+```bash
+-i /to/itcont/file/path
+-d /to/medianvals_by_date/file/path
+-z /to/medianvals_by_zip/file/path
+```
+
+
 ### Unit Test
 
 run unit test of median class:
@@ -36,7 +44,7 @@ The Median class also record the number of transactions and the sum of transacti
 
 ## Authors 
 
-* [DaFun](https://github.com/DaFun/)**(Fei Cheng)**
+* [DaFun](https://github.com/DaFun/) **(Fei Cheng)**
 * [jlantos](https://github.com/jlantos)
 * [emhoa](https://github.com/emhoa)
 

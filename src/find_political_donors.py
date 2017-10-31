@@ -126,9 +126,9 @@ def print_median_by_date(dict_by_date, out):
 
 def main():
     parser = argparse.ArgumentParser(description='input and output files')
-    parser.add_argument("--infile", "-i", nargs=1, help="input file")
-    parser.add_argument("--zip", "-z", nargs=1, help="medianvals_by_zip")
-    parser.add_argument("--date", "-d", nargs=1, help="medianvals_by_date")
+    parser.add_argument("--infile", "-i", nargs=1, help="input file path")
+    parser.add_argument("--zip", "-z", nargs=1, help="medianvals_by_zip file path")
+    parser.add_argument("--date", "-d", nargs=1, help="medianvals_by_date file path")
     args = parser.parse_args()
 
     dict_by_zip = {}
